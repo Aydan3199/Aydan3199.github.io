@@ -6,29 +6,81 @@
     <title>我的 GitHub 個人頁面</title>
     <!-- 引入 jQuery 庫 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* 一些簡單的樣式 */
+        #content, #slideContent {
+            display: none;
+            margin: 20px 0;
+        }
+        #image {
+            width: 200px;
+            height: auto;
+            transition: width 0.5s;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>歡迎來到我的個人頁面！</h1>
-    
+    <h1>歡迎來到我的互動頁面！</h1>
+
     <!-- 顯示/隱藏內容功能 -->
-    <button id="toggleButton">顯示/隱藏內容</button>
-    <div id="content" style="display: none;">這是一些隱藏的內容。</div>
-    
+    <button class="btn" id="toggleButton">顯示/隱藏內容</button>
+    <div id="content">這是一段可以顯示或隱藏的文字。</div>
+
     <!-- 更改顏色功能 -->
-    <button id="changeColorButton">更改顏色</button>
+    <button class="btn" id="changeColorButton">更改文字顏色</button>
     <p id="text">這段文字的顏色會被改變。</p>
-    
+
+    <!-- 變更背景顏色功能 -->
+    <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
+
+    <!-- 圖片縮放功能 -->
+    <button class="btn" id="zoomImageButton">放大/縮小圖片</button>
+    <img id="image" src="https://via.placeholder.com/200" alt="示例圖片">
+
+    <!-- 滑動顯示功能 -->
+    <button class="btn" id="slideToggleButton">滑動顯示/隱藏內容</button>
+    <div id="slideContent">這是一段可以滑動顯示或隱藏的文字。</div>
+
     <script>
-        // jQuery 程式碼
+        // jQuery 互動功能
         $(document).ready(function() {
             // 顯示/隱藏內容功能
             $("#toggleButton").click(function() {
-                $("#content").toggle(); // 顯示或隱藏內容
+                $("#content").toggle();
             });
             
-            // 更改顏色功能
+            // 更改文字顏色功能
             $("#changeColorButton").click(function() {
-                $("#text").css("color", "blue"); // 將文字顏色改為藍色
+                $("#text").css("color", "blue");
+            });
+
+            // 變更背景顏色功能
+            $("#changeBackgroundButton").click(function() {
+                const colors = ["#f8b400", "#e91e63", "#4caf50", "#2196f3", "#9c27b0"];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                $("body").css("background-color", randomColor);
+            });
+
+            // 圖片縮放功能
+            $("#zoomImageButton").click(function() {
+                const image = $("#image");
+                const newWidth = image.width() === 200 ? 400 : 200;
+                image.css("width", newWidth);
+            });
+
+            // 滑動顯示/隱藏內容功能
+            $("#slideToggleButton").click(function() {
+                $("#slideContent").slideToggle();
             });
         });
     </script>
