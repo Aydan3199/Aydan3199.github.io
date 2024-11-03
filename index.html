@@ -9,14 +9,26 @@
 </head>
 <body>
     <h1>歡迎來到我的個人頁面！</h1>
+    
+    <!-- 顯示/隱藏內容功能 -->
     <button id="toggleButton">顯示/隱藏內容</button>
     <div id="content" style="display: none;">這是一些隱藏的內容。</div>
+    
+    <!-- 更改顏色功能 -->
+    <button id="changeColorButton">更改顏色</button>
+    <p id="text">這段文字的顏色會被改變。</p>
     
     <script>
         // jQuery 程式碼
         $(document).ready(function() {
+            // 顯示/隱藏內容功能
             $("#toggleButton").click(function() {
                 $("#content").toggle(); // 顯示或隱藏內容
+            });
+            
+            // 更改顏色功能
+            $("#changeColorButton").click(function() {
+                $("#text").css("color", "blue"); // 將文字顏色改為藍色
             });
         });
     </script>
