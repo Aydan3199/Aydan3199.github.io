@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的 GitHub 個人頁面</title>
+    <title>探索夢幻島</title>
     <!-- 引入 jQuery 庫 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* 一些簡單的樣式 */
-        #content, #slideContent {
-            display: none;
-            margin: 20px 0;
-        }
-        #image {
-            width: 200px;
-            height: auto;
-            transition: width 0.5s;
-        }
+        /* 簡單的樣式 */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            transition: background-color 0.5s;
+        }
+        #intro, #gallery, #details, #toggleDetails {
+            display: none;
+            margin: 20px 0;
+        }
+        #intro p {
+            font-size: 18px;
+            line-height: 1.6;
         }
         .btn {
             margin: 10px;
@@ -27,60 +27,75 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .gallery-img {
+            width: 300px;
+            height: auto;
+            transition: transform 0.5s;
+        }
     </style>
 </head>
 <body>
-    <h1>歡迎來到我的互動頁面！</h1>
+    <h1>探索夢幻島</h1>
 
-    <!-- 顯示/隱藏內容功能 -->
-    <button class="btn" id="toggleButton">顯示/隱藏內容</button>
-    <div id="content">這是一段可以顯示或隱藏的文字。</div>
+    <!-- 介紹區 -->
+    <button class="btn" id="showIntroButton">探索介紹</button>
+    <div id="intro">
+        <p>夢幻島是一個充滿自然美景和神秘傳說的地方，擁有如畫的海灘和壯麗的山脈。</p>
+    </div>
 
-    <!-- 更改顏色功能 -->
-    <button class="btn" id="changeColorButton">更改文字顏色</button>
-    <p id="text">這段文字的顏色會被改變。</p>
+    <!-- 更改背景功能 -->
+    <button class="btn" id="changeBackgroundButton">變更背景風格</button>
 
-    <!-- 變更背景顏色功能 -->
-    <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
+    <!-- 圖片輪播功能 -->
+    <button class="btn" id="nextImageButton">下一張景點照片</button>
+    <img id="gallery" class="gallery-img" src="https://via.placeholder.com/300?text=景點1" alt="夢幻島照片">
 
-    <!-- 圖片縮放功能 -->
-    <button class="btn" id="zoomImageButton">放大/縮小圖片</button>
-    <img id="image" src="https://via.placeholder.com/200" alt="示例圖片">
+    <!-- 詳細資訊顯示/隱藏功能 -->
+    <button class="btn" id="toggleDetailsButton">顯示/隱藏詳細資訊</button>
+    <div id="details">
+        <p>夢幻島擁有豐富的動植物資源，海水清澈，適合浮潛和潛水，山景壯觀，徒步旅行愛好者的天堂。</p>
+    </div>
 
-    <!-- 滑動顯示功能 -->
-    <button class="btn" id="slideToggleButton">滑動顯示/隱藏內容</button>
-    <div id="slideContent">這是一段可以滑動顯示或隱藏的文字。</div>
+    <!-- 縮放圖片功能 -->
+    <button class="btn" id="zoomImageButton">放大/縮小照片</button>
 
     <script>
-        // jQuery 互動功能
         $(document).ready(function() {
-            // 顯示/隱藏內容功能
-            $("#toggleButton").click(function() {
-                $("#content").toggle();
-            });
-            
-            // 更改文字顏色功能
-            $("#changeColorButton").click(function() {
-                $("#text").css("color", "blue");
+            // 介紹顯示/隱藏功能
+            $("#showIntroButton").click(function() {
+                $("#intro").fadeToggle();
             });
 
-            // 變更背景顏色功能
+            // 變更背景風格
             $("#changeBackgroundButton").click(function() {
-                const colors = ["#f8b400", "#e91e63", "#4caf50", "#2196f3", "#9c27b0"];
+                const colors = ["#f0f8ff", "#faebd7", "#e6e6fa", "#fffacd", "#dcdcdc"];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 $("body").css("background-color", randomColor);
             });
 
-            // 圖片縮放功能
-            $("#zoomImageButton").click(function() {
-                const image = $("#image");
-                const newWidth = image.width() === 200 ? 400 : 200;
-                image.css("width", newWidth);
+            // 圖片輪播功能
+            const images = [
+                "https://via.placeholder.com/300?text=景點1",
+                "https://via.placeholder.com/300?text=景點2",
+                "https://via.placeholder.com/300?text=景點3",
+                "https://via.placeholder.com/300?text=景點4"
+            ];
+            let imageIndex = 0;
+            $("#nextImageButton").click(function() {
+                imageIndex = (imageIndex + 1) % images.length;
+                $("#gallery").attr("src", images[imageIndex]).show();
             });
 
-            // 滑動顯示/隱藏內容功能
-            $("#slideToggleButton").click(function() {
-                $("#slideContent").slideToggle();
+            // 詳細資訊顯示/隱藏功能
+            $("#toggleDetailsButton").click(function() {
+                $("#details").slideToggle();
+            });
+
+            // 縮放圖片功能
+            $("#zoomImageButton").click(function() {
+                const img = $("#gallery");
+                const isZoomed = img.width() > 300;
+                img.css("transform", isZoomed ? "scale(1)" : "scale(1.5)");
             });
         });
     </script>
