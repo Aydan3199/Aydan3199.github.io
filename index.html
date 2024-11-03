@@ -31,6 +31,14 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
         }
         #weatherEffect {
             position: fixed;
@@ -61,6 +69,7 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* 初始隱藏通知 */
         }
     </style>
 </head>
@@ -132,9 +141,9 @@
 
             // 圖片輪播
             const images = [
-                "https://via.placeholder.com/300?text=景點1",
-                "https://via.placeholder.com/300?text=景點2",
-                "https://via.placeholder.com/300?text=景點3"
+                "images/background.jpg",
+                "images/background.jpg",
+                "images/background.jpg"
             ];
             let imageIndex = 0;
             $("#nextImageButton").click(function() {
@@ -167,7 +176,8 @@
                 $("#survey").fadeToggle();
             });
             $("#submitSurveyButton").click(function() {
-                alert("感謝您的參與！");
+                const activity = $("#activityInput").val();
+                alert("感謝您的參與！您最喜歡的活動是：" + activity);
                 $("#survey").hide();
             });
 
@@ -179,4 +189,5 @@
     </script>
 </body>
 </html>
+
 
