@@ -24,21 +24,12 @@
         #gallery img {
             width: 300px;
             height: auto;
-            transition: transform 0.5s;
         }
         .btn {
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #45a049;
         }
         #weatherEffect {
             position: fixed;
@@ -69,7 +60,6 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none; /* 初始隱藏通知 */
         }
     </style>
 </head>
@@ -87,8 +77,7 @@
     <!-- 變更背景顏色 -->
     <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
 
-    <!-- 圖片輪播 -->
-    <button class="btn" id="nextImageButton">下一張景點照片</button>
+    <!-- 顯示單張圖片 -->
     <div id="gallery">
         <img src="https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg" alt="夢幻島照片">
     </div>
@@ -139,18 +128,6 @@
                 $("body").css("background-color", randomColor);
             });
 
-            // 圖片輪播
-            const images = [
-                "https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg",
-                "https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg",
-                "https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg"
-            ];
-            let imageIndex = 0;
-            $("#nextImageButton").click(function() {
-                imageIndex = (imageIndex + 1) % images.length;
-                $("#gallery img").attr("src", images[imageIndex]).show();
-            });
-
             // 詳細資訊顯示/隱藏
             $("#toggleDetailsButton").click(function() {
                 $("#details").slideToggle();
@@ -176,8 +153,7 @@
                 $("#survey").fadeToggle();
             });
             $("#submitSurveyButton").click(function() {
-                const activity = $("#activityInput").val();
-                alert("感謝您的參與！您最喜歡的活動是：" + activity);
+                alert("感謝您的參與！");
                 $("#survey").hide();
             });
 
