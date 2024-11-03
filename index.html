@@ -7,19 +7,24 @@
     <!-- 引入 jQuery 庫 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* 簡單的樣式 */
+        /* 基本樣式 */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f0f8ff;
             transition: background-color 0.5s;
         }
-        #intro, #gallery, #details, #toggleDetails {
+        #intro, #gallery, #details, #weatherEffect, #survey, #notification {
             display: none;
             margin: 20px 0;
         }
-        #intro p {
+        #intro p, #survey p {
             font-size: 18px;
-            line-height: 1.6;
+        }
+        #gallery img {
+            width: 300px;
+            height: auto;
+            transition: transform 0.5s;
         }
         .btn {
             margin: 10px;
@@ -27,77 +32,151 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .gallery-img {
-            width: 300px;
-            height: auto;
-            transition: transform 0.5s;
+        #weatherEffect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .raindrop {
+            width: 3px;
+            height: 20px;
+            background-color: #00aaff;
+            position: absolute;
+            animation: rain 0.7s linear infinite;
+        }
+        @keyframes rain {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffdd57;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
     <h1>探索夢幻島</h1>
 
-    <!-- 介紹區 -->
+    <!-- 簡介內容顯示/隱藏 -->
     <button class="btn" id="showIntroButton">探索介紹</button>
     <div id="intro">
         <p>夢幻島是一個充滿自然美景和神秘傳說的地方，擁有如畫的海灘和壯麗的山脈。</p>
+        <audio id="backgroundMusic" src="https://www.soundjay.com/nature/ocean-wave-1.mp3" loop></audio>
+        <button class="btn" id="toggleMusicButton">播放/暫停音樂</button>
     </div>
 
-    <!-- 更改背景功能 -->
-    <button class="btn" id="changeBackgroundButton">變更背景風格</button>
+    <!-- 變更背景顏色 -->
+    <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
 
-    <!-- 圖片輪播功能 -->
+    <!-- 圖片輪播 -->
     <button class="btn" id="nextImageButton">下一張景點照片</button>
-    <img id="gallery" class="gallery-img" src="https://via.placeholder.com/300?text=景點1" alt="夢幻島照片">
+    <div id="gallery">
+        <img src="https://via.placeholder.com/300?text=景點1" alt="夢幻島照片">
+    </div>
 
-    <!-- 詳細資訊顯示/隱藏功能 -->
+    <!-- 詳細資訊顯示/隱藏 -->
     <button class="btn" id="toggleDetailsButton">顯示/隱藏詳細資訊</button>
     <div id="details">
-        <p>夢幻島擁有豐富的動植物資源，海水清澈，適合浮潛和潛水，山景壯觀，徒步旅行愛好者的天堂。</p>
+        <p>夢幻島擁有豐富的動植物資源，是浮潛和徒步旅行的絕佳去處。</p>
     </div>
 
-    <!-- 縮放圖片功能 -->
-    <button class="btn" id="zoomImageButton">放大/縮小照片</button>
+    <!-- 模擬天氣效果 -->
+    <button class="btn" id="toggleWeatherButton">顯示/隱藏下雨效果</button>
+    <div id="weatherEffect"></div>
+
+    <!-- 互動表單 -->
+    <button class="btn" id="surveyButton">參加調查</button>
+    <div id="survey">
+        <p>你最喜歡的景點活動是什麼？</p>
+        <input type="text" id="activityInput" placeholder="輸入活動名稱">
+        <button class="btn" id="submitSurveyButton">提交</button>
+    </div>
+
+    <!-- 訊息通知 -->
+    <button class="btn" id="notificationButton">顯示通知</button>
+    <div id="notification">歡迎來到夢幻島！享受這趟探索之旅吧！</div>
 
     <script>
         $(document).ready(function() {
-            // 介紹顯示/隱藏功能
+            // 簡介顯示/隱藏
             $("#showIntroButton").click(function() {
                 $("#intro").fadeToggle();
             });
 
-            // 變更背景風格
+            // 背景音樂播放/暫停
+            $("#toggleMusicButton").click(function() {
+                const music = $("#backgroundMusic")[0];
+                if (music.paused) {
+                    music.play();
+                } else {
+                    music.pause();
+                }
+            });
+
+            // 變更背景顏色
             $("#changeBackgroundButton").click(function() {
-                const colors = ["#f0f8ff", "#faebd7", "#e6e6fa", "#fffacd", "#dcdcdc"];
+                const colors = ["#f8b400", "#e91e63", "#4caf50", "#2196f3", "#9c27b0"];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 $("body").css("background-color", randomColor);
             });
 
-            // 圖片輪播功能
+            // 圖片輪播
             const images = [
                 "https://via.placeholder.com/300?text=景點1",
                 "https://via.placeholder.com/300?text=景點2",
-                "https://via.placeholder.com/300?text=景點3",
-                "https://via.placeholder.com/300?text=景點4"
+                "https://via.placeholder.com/300?text=景點3"
             ];
             let imageIndex = 0;
             $("#nextImageButton").click(function() {
                 imageIndex = (imageIndex + 1) % images.length;
-                $("#gallery").attr("src", images[imageIndex]).show();
+                $("#gallery img").attr("src", images[imageIndex]).show();
             });
 
-            // 詳細資訊顯示/隱藏功能
+            // 詳細資訊顯示/隱藏
             $("#toggleDetailsButton").click(function() {
                 $("#details").slideToggle();
             });
 
-            // 縮放圖片功能
-            $("#zoomImageButton").click(function() {
-                const img = $("#gallery");
-                const isZoomed = img.width() > 300;
-                img.css("transform", isZoomed ? "scale(1)" : "scale(1.5)");
+            // 模擬天氣效果
+            $("#toggleWeatherButton").click(function() {
+                if ($("#weatherEffect").is(":empty")) {
+                    for (let i = 0; i < 100; i++) {
+                        const drop = $("<div>").addClass("raindrop").css({
+                            left: Math.random() * 100 + "vw",
+                            animationDuration: 0.5 + Math.random() * 0.5 + "s"
+                        });
+                        $("#weatherEffect").append(drop);
+                    }
+                } else {
+                    $("#weatherEffect").empty();
+                }
+            });
+
+            // 互動表單顯示/隱藏
+            $("#surveyButton").click(function() {
+                $("#survey").fadeToggle();
+            });
+            $("#submitSurveyButton").click(function() {
+                alert("感謝您的參與！");
+                $("#survey").hide();
+            });
+
+            // 顯示訊息通知
+            $("#notificationButton").click(function() {
+                $("#notification").fadeIn().delay(3000).fadeOut();
             });
         });
     </script>
 </body>
 </html>
+
