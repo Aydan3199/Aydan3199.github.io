@@ -4,14 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>探索夢幻島</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 確保這裡指向正確的 CSS 文件 -->
+    <!-- 引入 jQuery 庫 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* 基本樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            transition: background-color 0.5s;
+        }
+        #intro, #gallery, #details, #weatherEffect, #survey, #notification {
+            display: none;
+            margin: 20px 0;
+        }
+        #intro p, #survey p {
+            font-size: 18px;
+        }
+        #gallery img {
+            width: 300px;
+            height: auto;
+        }
+        .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #weatherEffect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .raindrop {
+            width: 3px;
+            height: 20px;
+            background-color: #00aaff;
+            position: absolute;
+            animation: rain 0.7s linear infinite;
+        }
+        @keyframes rain {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffdd57;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>探索夢幻島</h1>
-    </header>
+    <h1>探索夢幻島</h1>
 
+    <!-- 簡介內容顯示/隱藏 -->
     <button class="btn" id="showIntroButton">探索介紹</button>
     <div id="intro">
         <p>夢幻島是一個充滿自然美景和神秘傳說的地方，擁有如畫的海灘和壯麗的山脈。</p>
@@ -19,20 +74,25 @@
         <button class="btn" id="toggleMusicButton">播放/暫停音樂</button>
     </div>
 
+    <!-- 變更背景顏色 -->
     <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
 
+    <!-- 顯示單張圖片 -->
     <div id="gallery">
-        <img src="https://via.placeholder.com/300" alt="夢幻島照片"> <!-- 使用示例圖片 -->
+        <img src="https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg" alt="夢幻島照片">
     </div>
 
+    <!-- 詳細資訊顯示/隱藏 -->
     <button class="btn" id="toggleDetailsButton">顯示/隱藏詳細資訊</button>
     <div id="details">
         <p>夢幻島擁有豐富的動植物資源，是浮潛和徒步旅行的絕佳去處。</p>
     </div>
 
+    <!-- 模擬天氣效果 -->
     <button class="btn" id="toggleWeatherButton">顯示/隱藏下雨效果</button>
     <div id="weatherEffect"></div>
 
+    <!-- 互動表單 -->
     <button class="btn" id="surveyButton">參加調查</button>
     <div id="survey">
         <p>你最喜歡的景點活動是什麼？</p>
@@ -40,12 +100,9 @@
         <button class="btn" id="submitSurveyButton">提交</button>
     </div>
 
+    <!-- 訊息通知 -->
     <button class="btn" id="notificationButton">顯示通知</button>
     <div id="notification">歡迎來到夢幻島！享受這趟探索之旅吧！</div>
-
-    <footer>
-        <p>© 2024 探索夢幻島</p>
-    </footer>
 
     <script>
         $(document).ready(function() {
