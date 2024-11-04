@@ -1,92 +1,71 @@
+/* 基本樣式 */
 body {
-  font-family: 'Arial', sans-serif; /* 使用 Arial 字體 */
-  background-color: #34495e; /* 深藍色背景 */
-  color: #ecf0f1; /* 淺色文字 */
-  margin: 0;
-  padding: 0;
-  text-align: center; /* 文字居中 */
-}
-
-header {
-  background-color: #2980b9; /* 深藍色背景 */
-  color: #ffffff; /* 白色文字 */
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f8ff; /* 柔和的藍色背景 */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s;
 }
 
 h1 {
-  font-size: 48px; /* 標題字體大小 */
-  margin: 0;
+    color: #333;
+    font-size: 2.5em;
+    margin-top: 20px;
 }
 
-button.btn {
-  background-color: #f39c12; /* 金橘色按鈕 */
-  color: #ffffff; /* 按鈕文字顏色 */
-  padding: 12px 24px; /* 按鈕內邊距 */
-  border: none; /* 無邊框 */
-  border-radius: 5px; /* 圓角按鈕 */
-  cursor: pointer; /* 鼠標指針為手形 */
-  font-size: 16px; /* 按鈕字體大小 */
-  transition: background-color 0.3s, transform 0.3s; /* 背景色過渡效果 */
-  margin: 10px; /* 按鈕上下邊距 */
-}
-
-button.btn:hover {
-  background-color: #e67e22; /* 懸停時變為橙色 */
-  transform: scale(1.05); /* 懸停時輕微放大 */
-}
-
+/* 區塊樣式 */
 #intro, #gallery, #details, #weatherEffect, #survey, #notification {
-  display: none; /* 初始隱藏 */
-  margin: 20px auto; /* 自動上下邊距 */
-  max-width: 600px; /* 最大寬度 */
-  background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
-  border-radius: 10px; /* 圓角 */
-  padding: 20px; /* 內邊距 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+    display: none;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* 文字樣式 */
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 圖片樣式 */
 #gallery img {
-  width: 100%; /* 圖片寬度為100% */
-  border-radius: 10px; /* 圓角圖片 */
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.5s;
 }
 
-#notification {
-  background-color: #f39c12; /* 金橘色背景 */
-  padding: 15px;
-  border-radius: 5px; /* 圓角 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+/* 按鈕樣式 */
+.btn {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff7f50; /* 珊瑚橘色 */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.btn:hover {
+    background-color: #ff6347; /* 深一點的珊瑚橘色 */
+}
+
+/* 下雨效果 */
 #weatherEffect {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* 禁用事件 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
 }
 
 .raindrop {
-  width: 3px;
-  height: 20px;
-  background-color: #00aaff; /* 雨滴顏色 */
-  position: absolute;
-  animation: rain 0.7s linear infinite;
-}
-
-@keyframes rain {
-  to {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-footer {
-  margin-top: 50px; /* 上方邊距 */
-  background-color: #2c3e50; /* 深藍色背景 */
-  color: white; /* 文字顏色為白色 */
-  padding: 20px; /* 內邊距 */
-  font-size: 16px; /* 字體大小 */
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* 陰影效果 */
-}
