@@ -11,26 +11,62 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f8ff;
+            background-color: #f0f8ff; /* 柔和的藍色背景 */
+            margin: 0;
+            padding: 0;
             transition: background-color 0.5s;
         }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        /* 區塊樣式 */
         #intro, #gallery, #details, #weatherEffect, #survey, #notification {
             display: none;
-            margin: 20px 0;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-        #intro p, #survey p {
+
+        /* 文字樣式 */
+        p {
             font-size: 18px;
+            line-height: 1.6;
+            color: #555;
         }
+
+        /* 圖片樣式 */
         #gallery img {
-            width: 300px;
+            width: 100%;
             height: auto;
+            border-radius: 8px;
+            transition: transform 0.5s;
         }
+
+        /* 按鈕樣式 */
         .btn {
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
+            background-color: #ff7f50; /* 珊瑚橘色 */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
+        .btn:hover {
+            background-color: #ff6347; /* 深一點的珊瑚橘色 */
+        }
+
+        /* 下雨效果 */
         #weatherEffect {
             position: fixed;
             top: 0;
@@ -38,7 +74,9 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 100;
         }
+
         .raindrop {
             width: 3px;
             height: 20px;
@@ -46,12 +84,15 @@
             position: absolute;
             animation: rain 0.7s linear infinite;
         }
+
         @keyframes rain {
             to {
                 transform: translateY(100vh);
                 opacity: 0;
             }
         }
+
+        /* 通知彈出框 */
         #notification {
             position: fixed;
             top: 20px;
@@ -60,6 +101,8 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 200;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -77,7 +120,7 @@
     <!-- 變更背景顏色 -->
     <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
 
-    <!-- 顯示單張圖片 -->
+    <!-- 圖片展示 -->
     <div id="gallery">
         <img src="https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg" alt="夢幻島照片">
     </div>
@@ -91,14 +134,6 @@
     <!-- 模擬天氣效果 -->
     <button class="btn" id="toggleWeatherButton">顯示/隱藏下雨效果</button>
     <div id="weatherEffect"></div>
-
-    <!-- 互動表單 -->
-    <button class="btn" id="surveyButton">參加調查</button>
-    <div id="survey">
-        <p>你最喜歡的景點活動是什麼？</p>
-        <input type="text" id="activityInput" placeholder="輸入活動名稱">
-        <button class="btn" id="submitSurveyButton">提交</button>
-    </div>
 
     <!-- 訊息通知 -->
     <button class="btn" id="notificationButton">顯示通知</button>
@@ -146,15 +181,6 @@
                 } else {
                     $("#weatherEffect").empty();
                 }
-            });
-
-            // 互動表單顯示/隱藏
-            $("#surveyButton").click(function() {
-                $("#survey").fadeToggle();
-            });
-            $("#submitSurveyButton").click(function() {
-                alert("感謝您的參與！");
-                $("#survey").hide();
             });
 
             // 顯示訊息通知
