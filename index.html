@@ -1,193 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>探索夢幻島</title>
-    <!-- 引入 jQuery 庫 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        /* 基本樣式 */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f8ff; /* 柔和的藍色背景 */
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.5s;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-top: 20px;
-        }
-
-        /* 區塊樣式 */
-        #intro, #gallery, #details, #weatherEffect, #survey, #notification {
-            display: none;
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 600px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 文字樣式 */
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        /* 圖片樣式 */
-        #gallery img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.5s;
-        }
-
-        /* 按鈕樣式 */
-        .btn {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ff7f50; /* 珊瑚橘色 */
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #ff6347; /* 深一點的珊瑚橘色 */
-        }
-
-        /* 下雨效果 */
-        #weatherEffect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        .raindrop {
-            width: 3px;
-            height: 20px;
-            background-color: #00aaff;
-            position: absolute;
-            animation: rain 0.7s linear infinite;
-        }
-
-        @keyframes rain {
-            to {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* 通知彈出框 */
-        #notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #ffdd57;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 200;
-            font-weight: bold;
-        }
-    </style>
+    <title>戒菸支持平台</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>探索夢幻島</h1>
+    <header>
+        <h1>歡迎來到戒菸支持平台</h1>
+        <p>讓我們一起邁向無煙生活！</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#benefits">戒菸好處</a></li>
+            <li><a href="#tracker">戒菸進度追蹤</a></li>
+            <li><a href="#resources">戒菸資源</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- 戒菸好處 -->
+        <section id="benefits">
+            <h2>戒菸好處</h2>
+            <ul>
+                <li>改善肺功能與呼吸健康</li>
+                <li>降低心血管疾病風險</li>
+                <li>增加壽命與生活品質</li>
+                <li>節省開銷</li>
+            </ul>
+        </section>
 
-    <!-- 簡介內容顯示/隱藏 -->
-    <button class="btn" id="showIntroButton">探索介紹</button>
-    <div id="intro">
-        <p>夢幻島是一個充滿自然美景和神秘傳說的地方，擁有如畫的海灘和壯麗的山脈。</p>
-        <audio id="backgroundMusic" src="https://www.soundjay.com/nature/ocean-wave-1.mp3" loop></audio>
-        <button class="btn" id="toggleMusicButton">播放/暫停音樂</button>
-    </div>
+        <!-- 戒菸進度追蹤 -->
+        <section id="tracker">
+            <h2>戒菸進度追蹤</h2>
+            <p>您已成功戒菸了 <span id="days">0</span> 天！</p>
+            <label for="startDate">選擇您的戒菸開始日期：</label>
+            <input type="date" id="startDate">
+            <button onclick="calculateDays()">計算</button>
+        </section>
 
-    <!-- 變更背景顏色 -->
-    <button class="btn" id="changeBackgroundButton">變更背景顏色</button>
+        <!-- 戒菸資源 -->
+        <section id="resources">
+            <h2>戒菸資源</h2>
+            <p>這些資源可以幫助您成功戒菸：</p>
+            <ul>
+                <li><a href="https://quit.org" target="_blank">戒菸熱線</a></li>
+                <li><a href="https://support.org" target="_blank">戒菸支持社群</a></li>
+                <li><a href="https://health.gov" target="_blank">健康指南</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2024 戒菸支持平台 | 一起邁向健康生活</p>
+    </footer>
 
-    <!-- 圖片展示 -->
-    <div id="gallery">
-        <img src="https://pic.616pic.com/bg_w1180/00/04/15/473ntZGNHi.jpg" alt="夢幻島照片">
-    </div>
-
-    <!-- 詳細資訊顯示/隱藏 -->
-    <button class="btn" id="toggleDetailsButton">顯示/隱藏詳細資訊</button>
-    <div id="details">
-        <p>夢幻島擁有豐富的動植物資源，是浮潛和徒步旅行的絕佳去處。</p>
-    </div>
-
-    <!-- 模擬天氣效果 -->
-    <button class="btn" id="toggleWeatherButton">顯示/隱藏下雨效果</button>
-    <div id="weatherEffect"></div>
-
-    <!-- 訊息通知 -->
-    <button class="btn" id="notificationButton">顯示通知</button>
-    <div id="notification">歡迎來到夢幻島！享受這趟探索之旅吧！</div>
-
-    <script>
-        $(document).ready(function() {
-            // 簡介顯示/隱藏
-            $("#showIntroButton").click(function() {
-                $("#intro").fadeToggle();
-            });
-
-            // 背景音樂播放/暫停
-            $("#toggleMusicButton").click(function() {
-                const music = $("#backgroundMusic")[0];
-                if (music.paused) {
-                    music.play();
-                } else {
-                    music.pause();
-                }
-            });
-
-            // 變更背景顏色
-            $("#changeBackgroundButton").click(function() {
-                const colors = ["#f8b400", "#e91e63", "#4caf50", "#2196f3", "#9c27b0"];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                $("body").css("background-color", randomColor);
-            });
-
-            // 詳細資訊顯示/隱藏
-            $("#toggleDetailsButton").click(function() {
-                $("#details").slideToggle();
-            });
-
-            // 模擬天氣效果
-            $("#toggleWeatherButton").click(function() {
-                if ($("#weatherEffect").is(":empty")) {
-                    for (let i = 0; i < 100; i++) {
-                        const drop = $("<div>").addClass("raindrop").css({
-                            left: Math.random() * 100 + "vw",
-                            animationDuration: 0.5 + Math.random() * 0.5 + "s"
-                        });
-                        $("#weatherEffect").append(drop);
-                    }
-                } else {
-                    $("#weatherEffect").empty();
-                }
-            });
-
-            // 顯示訊息通知
-            $("#notificationButton").click(function() {
-                $("#notification").fadeIn().delay(3000).fadeOut();
-            });
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
