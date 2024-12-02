@@ -1,21 +1,34 @@
-// 計算戒菸天數
-function calculateDays() {
-    const startDateInput = document.getElementById("startDate");
-    const daysElement = document.getElementById("days");
+// 戒菸進度追蹤
+function calculateBenefits() {
+    const daysQuit = document.getElementById("daysQuit").value;
+    const results = document.getElementById("results");
 
-    if (!startDateInput.value) {
-        alert("請選擇您的戒菸開始日期！");
+    if (daysQuit <= 0 || isNaN(daysQuit)) {
+        results.innerHTML = "<p>請輸入有效的天數！</p>";
         return;
     }
 
-    const startDate = new Date(startDateInput.value);
-    const today = new Date();
-    const difference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+    const moneySaved = daysQuit * 5; // 每天省$5
+    const healthGain = Math.floor(daysQuit / 30) * 10; // 每30天+10健康分數
 
-    if (difference < 0) {
-        alert("戒菸開始日期不能是未來的日期！");
-        return;
-    }
-
-    daysElement.textContent = difference;
+    results.innerHTML = `
+        <p>您已經省下了 <strong>$${moneySaved}</strong>！</p>
+        <p>您的健康提升了 <strong>${healthGain} 分</strong>！</p>
+    `;
 }
+
+// 儲存戒菸計畫
+document.getElementById("planForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const goal = document.getElementById("goal").value;
+    const dailyNote = document.getElementById("dailyNote").value;
+    const planResults = document.getElementById("planResults");
+
+    planResults.innerHTML = `
+        <p>目標：<strong>${goal}</strong></p>
+        <p>今日記錄：${dailyNote}</p>
+    `;
+
+    document.getElementById("planForm").reset();
+});
