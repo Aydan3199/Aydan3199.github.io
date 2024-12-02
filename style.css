@@ -1,26 +1,24 @@
-/* 全局樣式 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 header {
-    background: #4CAF50;
+    background-color: #4CAF50;
     color: white;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
 }
 
 nav ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
-    background: #333;
+    background-color: #333;
 }
 
 nav ul li {
@@ -28,35 +26,46 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
     text-decoration: none;
+    color: white;
     padding: 10px;
-    display: block;
+    display: inline-block;
 }
 
 nav ul li a:hover {
-    background: #4CAF50;
-}
-
-main {
-    padding: 20px;
+    background-color: #4CAF50;
 }
 
 section {
-    background: white;
     padding: 20px;
-    margin: 20px 0;
+    margin: 20px;
+    background: white;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
+input, textarea, button {
     width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #333;
+    color: white;
+}
