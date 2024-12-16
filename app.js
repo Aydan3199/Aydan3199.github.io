@@ -8,7 +8,7 @@ function calculateBenefits() {
         return;
     }
 
-    const moneySaved = daysQuit * 5; // 每天省$5
+    const moneySaved = daysQuit * 110; // 每天省$110
     const healthGain = Math.floor(daysQuit / 30) * 10; // 每30天+10健康分數
 
     results.innerHTML = `
